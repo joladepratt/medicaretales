@@ -1,976 +1,1805 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicare Tales - Understanding Your Healthcare Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Georgia:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --warm-cream: #F7F3E9;
-            --deep-forest: #2D5016;
-            --soft-terracotta: #C17B5A;
-            --warm-gray: #8B7D6B;
-            --golden-amber: #D4A574;
-            --sage-green: #9CAF88;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Georgia, serif;
-            font-size: 18px;
-            line-height: 1.6;
-            letter-spacing: 0.02em;
-            color: var(--deep-forest);
-            background: linear-gradient(135deg, var(--warm-cream) 0%, #f9f5ed 25%, #f5f0e5 50%, #f1ead6 75%, var(--warm-cream) 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header with stunning gradient */
-        header {
-            background: linear-gradient(135deg, 
-                rgba(247, 243, 233, 0.95) 0%, 
-                rgba(245, 240, 229, 0.98) 25%, 
-                rgba(249, 245, 237, 0.95) 50%, 
-                rgba(241, 234, 214, 0.98) 75%, 
-                rgba(247, 243, 233, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            padding: 25px 0;
-            box-shadow: 0 8px 40px rgba(45, 80, 22, 0.12), 
-                        0 2px 10px rgba(45, 80, 22, 0.08);
-            border-bottom: 1px solid rgba(156, 175, 136, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--deep-forest) 0%, var(--sage-green) 50%, var(--soft-terracotta) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo i {
-            margin-right: 15px;
-            font-size: 32px;
-            background: linear-gradient(135deg, var(--soft-terracotta) 0%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .nav-links {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            color: var(--warm-gray);
-            text-decoration: none;
-            margin-left: 35px;
-            padding: 12px 20px;
-            border-radius: 25px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--sage-green) 0%, var(--golden-amber) 100%);
-            transition: left 0.4s ease;
-            border-radius: 25px;
-            z-index: -1;
-        }
-
-        .nav-links:hover::before {
-            left: 0;
-        }
-
-        .nav-links:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(156, 175, 136, 0.3);
-        }
-
-        .nav-links i {
-            margin-right: 8px;
-            font-size: 16px;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-links:hover i {
-            transform: scale(1.2);
-        }
-
-        /* Epic Hero Section */
-        .hero {
-            background: linear-gradient(135deg, 
-                var(--sage-green) 0%, 
-                var(--golden-amber) 25%, 
-                var(--soft-terracotta) 50%, 
-                var(--sage-green) 75%, 
-                var(--deep-forest) 100%);
-            padding: 120px 0;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 2px, transparent 2px),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 1px, transparent 1px),
-                radial-gradient(circle at 40% 80%, rgba(212, 165, 116, 0.15) 3px, transparent 3px);
-            background-size: 50px 50px, 30px 30px, 70px 70px;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(255,255,255,0.05) 50%, 
-                transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-
-        .hero > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-poem {
-            font-style: italic;
-            font-size: 22px;
-            margin: 40px auto;
-            max-width: 900px;
-            line-height: 1.8;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, 
-                var(--soft-terracotta) 0%, 
-                var(--golden-amber) 25%, 
-                var(--sage-green) 50%, 
-                var(--golden-amber) 75%, 
-                var(--soft-terracotta) 100%);
-            background-size: 300% 300%;
-            color: white;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            padding: 18px 45px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            margin-top: 40px;
-            box-shadow: 0 10px 35px rgba(193, 123, 90, 0.4),
-                        0 5px 15px rgba(193, 123, 90, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 1s ease-out 0.6s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            background-position: 100% 0;
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 15px 45px rgba(212, 165, 116, 0.5),
-                        0 8px 25px rgba(212, 165, 116, 0.3);
-        }
-
-        .cta-button i {
-            margin-left: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .cta-button:hover i {
-            transform: translateX(5px);
-        }
-
-        /* Main Content with dynamic backgrounds */
-        .main-content {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .intro-text {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 80px;
-            color: var(--warm-gray);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-            font-weight: 400;
-        }
-
-        /* Revolutionary Facts Section */
-        .facts-section {
-            margin: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--deep-forest) 0%, var(--soft-terracotta) 50%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            margin-bottom: 60px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            margin-top: 50px;
-        }
-
-        .fact-card {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.95) 0%, 
-                rgba(254, 252, 248, 0.98) 25%, 
-                rgba(252, 249, 243, 0.95) 50%, 
-                rgba(250, 246, 238, 0.98) 75%, 
-                rgba(255,255,255,0.95) 100%);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(45, 80, 22, 0.1),
-                        0 5px 20px rgba(45, 80, 22, 0.05);
-            border: 1px solid rgba(156, 175, 136, 0.2);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .fact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                var(--sage-green) 0%, 
-                var(--golden-amber) 33%, 
-                var(--soft-terracotta) 66%, 
-                var(--sage-green) 100%);
-            background-size: 300% 100%;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .fact-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(156, 175, 136, 0.08) 50%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        .fact-card:hover::after {
-            opacity: 1;
-            transform: rotate(45deg) translate(25%, 25%);
-        }
-
-        .fact-card:hover {
-            transform: translateY(-12px) rotateX(5deg);
-            box-shadow: 0 25px 70px rgba(45, 80, 22, 0.15),
-                        0 10px 30px rgba(45, 80, 22, 0.1);
-        }
-
-        .fact-icon {
-            font-size: 42px;
-            background: linear-gradient(135deg, var(--soft-terracotta) 0%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .fact-card:hover .fact-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .fact-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--deep-forest) 0%, var(--soft-terracotta) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 18px;
-        }
-
-        .fact-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--deep-forest);
-            margin-bottom: 25px;
-        }
-
-        .fact-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--warm-gray);
-        }
-
-        /* Spectacular Options Section */
-        .options-section {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.8) 0%, 
-                rgba(247, 243, 233, 0.9) 20%, 
-                rgba(245, 240, 229, 0.8) 40%, 
-                rgba(249, 245, 237, 0.9) 60%, 
-                rgba(241, 234, 214, 0.8) 80%, 
-                rgba(247, 243, 233, 0.9) 100%);
-            backdrop-filter: blur(10px);
-            padding: 100px 0;
-            margin: 100px 0;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .options-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(156, 175, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(193, 123, 90, 0.05) 0%, transparent 70%);
-            animation: float 15s ease-in-out infinite;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 60px;
-            margin-top: 60px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .option-card {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.95) 0%, 
-                rgba(254, 253, 251, 0.98) 25%, 
-                rgba(252, 250, 246, 0.95) 50%, 
-                rgba(250, 247, 241, 0.98) 75%, 
-                rgba(255,255,255,0.95) 100%);
-            backdrop-filter: blur(15px);
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(45, 80, 22, 0.1),
-                        0 8px 25px rgba(45, 80, 22, 0.05);
-            border: 1px solid rgba(156, 175, 136, 0.15);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(90deg, 
-                var(--golden-amber) 0%, 
-                var(--soft-terracotta) 25%, 
-                var(--sage-green) 50%, 
-                var(--soft-terracotta) 75%, 
-                var(--golden-amber) 100%);
-            background-size: 400% 100%;
-            animation: gradientShift 4s ease-in-out infinite;
-        }
-
-        .option-card:hover {
-            transform: translateY(-15px) rotateY(5deg);
-            box-shadow: 0 30px 80px rgba(45, 80, 22, 0.15),
-                        0 12px 35px rgba(45, 80, 22, 0.1);
-        }
-
-        .option-icon {
-            font-size: 48px;
-            background: linear-gradient(135deg, var(--golden-amber) 0%, var(--soft-terracotta) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            transition: transform 0.4s ease;
-        }
-
-        .option-card:hover .option-icon {
-            transform: scale(1.3) rotate(-5deg);
-        }
-
-        .option-subtitle {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--soft-terracotta) 0%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-        }
-
-        .option-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--deep-forest);
-            margin-bottom: 25px;
-        }
-
-        .option-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--warm-gray);
-        }
-
-        /* Mind-blowing Coming Soon Section */
-        .coming-soon {
-            background: linear-gradient(135deg, 
-                var(--sage-green) 0%, 
-                var(--deep-forest) 25%, 
-                #1e3a0f 50%, 
-                var(--deep-forest) 75%, 
-                var(--sage-green) 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease-in-out infinite;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            border-radius: 30px;
-            margin: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coming-soon::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: 
-                radial-gradient(circle, rgba(255,255,255,0.1) 2px, transparent 2px),
-                radial-gradient(circle, rgba(212, 165, 116, 0.15) 1px, transparent 1px);
-            background-size: 60px 60px, 40px 40px;
-            animation: float 25s linear infinite;
-        }
-
-        .coming-soon > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .coming-soon-icon {
-            font-size: 64px;
-            background: linear-gradient(135deg, var(--golden-amber) 0%, white 50%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .coming-soon h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 38px;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .coming-soon p {
-            font-size: 22px;
-            opacity: 0.95;
-            line-height: 1.6;
-        }
-
-        /* Magnificent Footer */
-        footer {
-            background: linear-gradient(135deg, 
-                var(--deep-forest) 0%, 
-                #1e3a0f 25%, 
-                #0f1a08 50%, 
-                #1e3a0f 75%, 
-                var(--deep-forest) 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                transparent 40%, 
-                rgba(156, 175, 136, 0.1) 50%, 
-                transparent 60%);
-            animation: shimmer 6s ease-in-out infinite;
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-icon {
-            font-size: 48px;
-            background: linear-gradient(135deg, var(--golden-amber) 0%, white 50%, var(--golden-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .footer-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .footer-text {
-            font-size: 18px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 42px; }
-            .hero-poem { font-size: 20px; }
-            .facts-grid { grid-template-columns: 1fr; }
-            .options-grid { grid-template-columns: 1fr; }
-            .fact-card, .option-card { padding: 40px; }
-            .section-title { font-size: 32px; }
-            .logo { font-size: 28px; }
-            .nav-links { margin-left: 20px; }
-        }
-
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        .cta-button:focus,
-        .nav-links:focus {
-            outline: 3px solid var(--golden-amber);
-            outline-offset: 3px;
-        }
-
-        /* Scroll animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicare Tales - Understanding Your Coverage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Georgia&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F7F3E9;
+      --forest: #2D5016;
+      --terracotta: #C17B5A;
+      --warm-gray: #8B7D6B;
+      --amber: #D4A574;
+      --sage: #9CAF88;
+      --forest-light: #3d6b20;
+      --forest-dark: #1e3510;
+      --cream-dark: #EDE7D5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--forest);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4, nav {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .accent-text {
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, rgba(45,80,22,0.97) 0%, rgba(30,53,16,0.99) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      box-shadow: 0 4px 30px rgba(45,80,22,0.3);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(212,165,116,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      color: var(--cream);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .nav-logo-text span {
+      color: var(--amber);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(247,243,233,0.85);
+      text-decoration: none;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--amber);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #a8643e 100%);
+      color: var(--cream) !important;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 15px rgba(193,123,90,0.35);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(193,123,90,0.5) !important;
+      color: var(--cream) !important;
+    }
+    .nav-cta::after { display: none !important; }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1e3510 0%, #2D5016 40%, #3d6b20 70%, #4a7a28 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-bg-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--amber), transparent);
+      top: -100px; right: -100px;
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--sage), transparent);
+      bottom: 0; left: -80px;
+      animation: floatOrb 10s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, var(--terracotta), transparent);
+      top: 40%; left: 40%;
+      animation: floatOrb 7s ease-in-out infinite 2s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(30px, -30px); }
+    }
+
+    /* Leaf pattern overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(156,175,136,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,165,116,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text { color: var(--cream); }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,165,116,0.15);
+      border: 1px solid rgba(212,165,116,0.4);
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.8s ease both;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      background: var(--amber);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      animation: fadeSlideDown 0.8s ease 0.1s both;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 19px;
+      color: rgba(247,243,233,0.8);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      animation: fadeSlideDown 0.8s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeSlideDown 0.8s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #a8643e 100%);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 30px rgba(193,123,90,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(193,123,90,0.55), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 2px solid rgba(247,243,233,0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(247,243,233,0.8);
+      background: rgba(247,243,233,0.08);
+    }
+
+    /* Hero Visual (3D Icon Panel) */
+    .hero-visual {
+      animation: fadeSlideUp 1s ease 0.4s both;
+      position: relative;
+    }
+
+    .hero-card-stack {
+      position: relative;
+      height: 420px;
+    }
+
+    .floating-card {
+      position: absolute;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.35),
+        0 4px 15px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    .card-main {
+      width: 320px;
+      background: linear-gradient(145deg, rgba(247,243,233,0.97) 0%, rgba(237,231,213,0.95) 100%);
+      top: 40px; left: 0;
+      z-index: 3;
+    }
+
+    .card-bg-1 {
+      width: 300px;
+      background: linear-gradient(145deg, rgba(156,175,136,0.9) 0%, rgba(120,145,100,0.85) 100%);
+      top: 10px; left: 20px;
+      z-index: 2;
+      animation-delay: -2s;
+    }
+
+    .card-bg-2 {
+      width: 280px;
+      background: linear-gradient(145deg, rgba(212,165,116,0.85) 0%, rgba(180,130,85,0.8) 100%);
+      top: -20px; left: 40px;
+      z-index: 1;
+      animation-delay: -4s;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-10px) rotate(0.5deg); }
+      66% { transform: translateY(-5px) rotate(-0.5deg); }
+    }
+
+    .card-icon-3d {
+      width: 64px; height: 64px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      border-radius: 16px;
+      box-shadow:
+        0 8px 20px rgba(0,0,0,0.15),
+        inset 0 2px 4px rgba(255,255,255,0.5),
+        inset 0 -2px 4px rgba(0,0,0,0.1);
+    }
+
+    .card-main .card-icon-3d {
+      background: linear-gradient(145deg, #e8f5d5 0%, #c5dba8 100%);
+    }
+
+    .card-main h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+
+    .card-main p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.5;
+    }
+
+    .card-stat-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .card-stat {
+      flex: 1;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(45,80,22,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .card-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--amber);
+      display: block;
+    }
+    .card-stat-label {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(247,243,233,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Floating badges around hero */
+    .hero-badge-float {
+      position: absolute;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    .badge-float-1 {
+      background: linear-gradient(135deg, var(--amber) 0%, #c49060 100%);
+      color: var(--forest-dark);
+      right: 20px; top: 0;
+      animation: floatBadge 5s ease-in-out infinite;
+    }
+    .badge-float-2 {
+      background: linear-gradient(135deg, var(--sage) 0%, #7a9a68 100%);
+      color: var(--forest-dark);
+      right: 60px; bottom: 20px;
+      animation: floatBadge 7s ease-in-out infinite reverse;
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { position: relative; }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section-label {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--forest);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 18px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+      max-width: 620px;
+    }
+
+    .section-divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--terracotta), var(--amber));
+      border-radius: 2px;
+      margin: 16px 0 32px;
+    }
+
+    /* ===== POEM SECTION ===== */
+    .poem-section {
+      background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest) 50%, var(--forest-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poem-section::before {
+      content: '"';
+      position: absolute;
+      top: -40px; left: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 400px;
+      color: rgba(212,165,116,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .poem-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .poem-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(145deg, rgba(212,165,116,0.25) 0%, rgba(212,165,116,0.1) 100%);
+      border: 2px solid rgba(212,165,116,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 32px;
+      box-shadow: 0 0 40px rgba(212,165,116,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .poem-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(247,243,233,0.9);
+      line-height: 2;
+      border-left: 3px solid var(--amber);
+      padding-left: 32px;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .poem-text p { margin-bottom: 8px; }
+    .poem-text p:last-child { margin-bottom: 0; }
+
+    /* ===== THREE FACTS SECTION ===== */
+    .facts-section {
+      background: var(--cream);
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .fact-card {
+      background: linear-gradient(160deg, #FFFFFF 0%, var(--cream-dark) 100%);
+      border-radius: 24px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 4px 30px rgba(45,80,22,0.08),
+        0 1px 4px rgba(45,80,22,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .fact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(160deg, rgba(212,165,116,0.3), rgba(156,175,136,0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .fact-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 20px 50px rgba(45,80,22,0.15),
+        0 4px 12px rgba(45,80,22,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .fact-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .fact-icon-3d {
+      width: 60px; height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      box-shadow:
+        0 8px 20px rgba(0,0,0,0.12),
+        inset 0 2px 4px rgba(255,255,255,0.6),
+        inset 0 -2px 4px rgba(0,0,0,0.08);
+    }
+
+    .fact-icon-green { background: linear-gradient(145deg, #d4edc0 0%, #a8cf88 100%); }
+    .fact-icon-amber { background: linear-gradient(145deg, #fde8c8 0%, #f5c882 100%); }
+    .fact-icon-terra { background: linear-gradient(145deg, #f5d8cc 0%, #dfa88e 100%); }
+
+    .fact-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 12px;
+    }
+
+    .fact-card p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+    }
+
+    /* ===== OPTIONS SECTION ===== */
+    .options-section {
+      background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+    }
+
+    .options-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+
+    .option-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .option-card {
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .option-card-medicaid {
+      background: linear-gradient(135deg, #f0f8e8 0%, #dfefd0 100%);
+      border: 1px solid rgba(156,175,136,0.4);
+      box-shadow: 0 8px 30px rgba(45,80,22,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .option-card-advantage {
+      background: linear-gradient(135deg, #fef6ec 0%, #fae5cd 100%);
+      border: 1px solid rgba(212,165,116,0.4);
+      box-shadow: 0 8px 30px rgba(212,165,116,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .option-card-supplement {
+      background: linear-gradient(135deg, #fdf1ee 0%, #f5ddd5 100%);
+      border: 1px solid rgba(193,123,90,0.3);
+      box-shadow: 0 8px 30px rgba(193,123,90,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .option-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .option-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .option-icon-3d {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow:
+        0 6px 16px rgba(0,0,0,0.12),
+        inset 0 2px 4px rgba(255,255,255,0.5),
+        inset 0 -2px 4px rgba(0,0,0,0.08);
+    }
+    .icon-medicaid { background: linear-gradient(145deg, #c8e8a8 0%, #8fc465 100%); }
+    .icon-advantage { background: linear-gradient(145deg, #fde0a8 0%, #f5b84a 100%); }
+    .icon-supplement { background: linear-gradient(145deg, #f8cdc0 0%, #e8956e 100%); }
+
+    .option-title-group h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 4px;
+    }
+
+    .option-tag {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .tag-green { background: rgba(45,80,22,0.1); color: var(--forest); }
+    .tag-amber { background: rgba(212,165,116,0.2); color: #8B5E2A; }
+    .tag-terra { background: rgba(193,123,90,0.15); color: #7A3D1A; }
+
+    .option-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--warm-gray);
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      border-left: 3px solid;
+      background: rgba(255,255,255,0.5);
+      border-radius: 0 8px 8px 0;
+    }
+    .option-card-medicaid .option-question { border-left-color: var(--sage); }
+    .option-card-advantage .option-question { border-left-color: var(--amber); }
+    .option-card-supplement .option-question { border-left-color: var(--terracotta); }
+
+    .option-body {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+    }
+
+    .option-features {
+      list-style: none;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      color: var(--warm-gray);
+    }
+
+    .feature-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .check-green { background: linear-gradient(135deg, var(--sage) 0%, #7a9a68 100%); color: white; }
+    .check-amber { background: linear-gradient(135deg, var(--amber) 0%, #b8885a 100%); color: white; }
+    .check-terra { background: linear-gradient(135deg, var(--terracotta) 0%, #a05030 100%); color: white; }
+
+    /* ===== POPUP GLOSSARY ===== */
+    .popup-term {
+      color: var(--terracotta);
+      font-weight: 600;
+      border-bottom: 2px dashed var(--terracotta);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .popup-term:hover { color: var(--amber); }
+
+    .popup-tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(145deg, var(--forest-dark) 0%, var(--forest) 100%);
+      color: var(--cream);
+      border-radius: 14px;
+      padding: 16px 20px;
+      width: 280px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      line-height: 1.6;
+      z-index: 200;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.3),
+        0 4px 12px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      pointer-events: none;
+    }
+
+    .popup-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: var(--forest);
+    }
+
+    .popup-tooltip .tooltip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .popup-term:hover .popup-tooltip { display: block; }
+
+    /* ===== WARNING BOX ===== */
+    .warning-box {
+      background: linear-gradient(135deg, #fff8e8 0%, #ffefd0 100%);
+      border: 1px solid rgba(212,165,116,0.5);
+      border-left: 5px solid var(--amber);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(212,165,116,0.15);
+    }
+
+    .warning-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(145deg, #fde0a8 0%, #f5b84a 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(245,184,74,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .warning-text h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+    .warning-text p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+    }
+
+    /* ===== COMING SOON SECTION ===== */
+    .coming-soon-section {
+      background: linear-gradient(160deg, var(--forest-dark) 0%, #2a5a14 50%, var(--forest-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming-soon-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(212,165,116,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(156,175,136,0.1) 0%, transparent 50%);
+    }
+
+    .coming-soon-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(212,165,116,0.15);
+      border: 1px solid rgba(212,165,116,0.35);
+      border-radius: 30px;
+      padding: 10px 24px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 32px;
+    }
+
+    .coming-soon-inner h2 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .coming-soon-inner h2 span {
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .coming-soon-inner p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 19px;
+      color: rgba(247,243,233,0.75);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .scenario-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .scenario-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: left;
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .scenario-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+    }
+
+    .scenario-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .av-1 { background: linear-gradient(135deg, #c8e8a8, #8fc465); }
+    .av-2 { background: linear-gradient(135deg, #fde0a8, #f5b84a); }
+    .av-3 { background: linear-gradient(135deg, #f8cdc0, #e8956e); }
+
+    .scenario-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .scenario-card p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 14px;
+      color: rgba(247,243,233,0.6);
+      line-height: 1.6;
+    }
+
+    .notify-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .notify-input {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 14px 24px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .notify-input::placeholder { color: rgba(247,243,233,0.45); }
+    .notify-input:focus {
+      border-color: rgba(212,165,116,0.6);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .notify-btn {
+      background: linear-gradient(135deg, var(--amber) 0%, #b8885a 100%);
+      color: var(--forest-dark);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212,165,116,0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .notify-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,165,116,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .notify-success {
+      display: none;
+      background: rgba(156,175,136,0.2);
+      border: 1px solid rgba(156,175,136,0.4);
+      border-radius: 50px;
+      padding: 14px 28px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 16px;
+      color: var(--sage);
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ===== DISCLAIMER SECTION ===== */
+    .disclaimer-section {
+      background: var(--cream);
+      border-top: 1px solid rgba(139,125,107,0.15);
+    }
+
+    .disclaimer-box {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .disclaimer-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(145deg, var(--cream-dark) 0%, #ddd4c0 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .disclaimer-box h3 {
+      font-size: 20px;
+      color: var(--warm-gray);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .disclaimer-box p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      color: var(--warm-gray);
+      line-height: 1.8;
+    }
+
+    .disclaimer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .disclaimer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--forest);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 2px solid var(--sage);
+      border-radius: 30px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .disclaimer-link:hover {
+      background: rgba(156,175,136,0.15);
+      border-color: var(--forest);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--forest-dark);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    footer .footer-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(212,165,116,0.3);
+    }
+
+    footer p {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 14px;
+      color: rgba(247,243,233,0.45);
+      line-height: 1.7;
+    }
+    footer .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--cream);
+    }
+    footer .footer-name span { color: var(--amber); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { display: none; }
+      .facts-grid { grid-template-columns: 1fr; }
+      .options-intro { grid-template-columns: 1fr; gap: 32px; }
+      .scenario-preview { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .section-container { padding: 60px 24px; }
+      .poem-inner { padding: 60px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .hero-content { padding: 60px 24px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    }
+
+    /* ===== MOBILE NAV TOGGLE ===== */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    @media (max-width: 900px) {
+      .nav-hamburger { display: flex; flex-direction: column; gap: 5px; }
+      .nav-hamburger span { width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: 0.3s; }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <i class="fas fa-heartbeat"></i>
-                Medicare Tales
-            </div>
-            <div>
-                <a href="#facts" class="nav-links">
-                    <i class="fas fa-lightbulb"></i>
-                    Learn the Facts
-                </a>
-                <a href="#options" class="nav-links">
-                    <i class="fas fa-route"></i>
-                    Your Options
-                </a>
-                <a href="#scenarios" class="nav-links">
-                    <i class="fas fa-chart-line"></i>
-                    Scenarios
-                </a>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Navigate Your Medicare Journey with Confidence</h1>
-                <div class="hero-poem">
-                    In the land of healthcare, where troubles arise,<br>
-                    Original Medicare was birthed, a plan aged and wise.<br>
-                    But tests, procedures, prescriptions, you thought would be free,<br>
-                    Now cost a pretty penny, oh say can't you see?<br><br>
-                    
-                    Fear not, dear friends, we'll find a way,<br>
-                    To close the gaps, laughing all the way!<br>
-                    For though coverage gaps may give us a fright,<br>
-                    Armed with information, we'll be alright!
-                </div>
-                <a href="#facts" class="cta-button">
-                    Start Learning Today
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </section>
+  <!-- NAVIGATION -->
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Medicare Tales Home">
+      <div class="nav-logo-icon" aria-hidden="true">&#9749;</div>
+      <span class="nav-logo-text">Medicare<span>Tales</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#facts">The Facts</a></li>
+      <li><a href="#options">Your Options</a></li>
+      <li><a href="#scenarios">Scenarios</a></li>
+      <li><a href="#resources" class="nav-cta">Get Help</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="toggleNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-        <section class="main-content">
-            <div class="container">
-                <div class="intro-text fade-in-up">
-                    Medicare is a great health coverage program provided by the US federal government. 
-                    Understanding your options is key to making the right choice for your healthcare needs and budget.
-                </div>
+  <!-- HERO SECTION -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg-orbs" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
 
-                <section id="facts" class="facts-section">
-                    <h2 class="section-title fade-in-up">3 Essential Medicare Facts You Need to Know</h2>
-                    
-                    <div class="facts-grid">
-                        <div class="fact-card fade-in-up">
-                            <i class="fas fa-exclamation-triangle fact-icon"></i>
-                            <div class="fact-number">Fact 1</div>
-                            <h3 class="fact-title">Mind the Gaps</h3>
-                            <p class="fact-description">
-                                Original Medicare does not cover everything. Hearing aids, routine dental and vision care are all out of reach and out of sight. Understanding these coverage gaps is the first step to better healthcare planning.
-                            </p>
-                        </div>
-
-                        <div class="fact-card fade-in-up">
-                            <i class="fas fa-tools fact-icon"></i>
-                            <div class="fact-number">Fact 2</div>
-                            <h3 class="fact-title">Close the Gaps</h3>
-                            <p class="fact-description">
-                                You have 2 separate paths to close the gaps that come with original Medicare. Choose between benefit gap closure or cost gap closure - each option serves different needs and budgets.
-                            </p>
-                        </div>
-
-                        <div class="fact-card fade-in-up">
-                            <i class="fas fa-bullseye fact-icon"></i>
-                            <div class="fact-number">Fact 3</div>
-                            <h3 class="fact-title">Choose Wisely</h3>
-                            <p class="fact-description">
-                                Choosing the wrong option may result in you paying more than you need, less than you need, or worse - paying and still not able to get the care you need. Education is your best protection.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="options" class="options-section">
-                    <div class="container">
-                        <h2 class="section-title fade-in-up">Your Two Paths to Better Coverage</h2>
-                        
-                        <div class="options-grid">
-                            <div class="option-card fade-in-up">
-                                <i class="fas fa-plus-circle option-icon"></i>
-                                <div class="option-subtitle">Benefit Gap Closure Option</div>
-                                <h3 class="option-title">Medicare Advantage Plans</h3>
-                                <p class="option-description">
-                                    Replace original Medicare with a Medicare Advantage plan that provides benefits not available with original Medicare. This includes drug plans, routine dental, vision, hearing aids, and wellness perks. Comes with a maximum out-of-pocket ceiling, but you'll still need to pay deductibles, coinsurance, and copays.
-                                </p>
-                            </div>
-
-                            <div class="option-card fade-in-up">
-                                <i class="fas fa-shield-alt option-icon"></i>
-                                <div class="option-subtitle">Cost Gap Closure Option</div>
-                                <h3 class="option-title">Medigap Supplement Plans</h3>
-                                <p class="option-description">
-                                    Supplement original Medicare with a Medigap (Medicare Supplement) plan to cover costs not covered by original Medicare, such as deductibles, coinsurance, and copays. This option doesn't provide additional benefits - you'll still need to purchase those separately if desired.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="scenarios" class="coming-soon">
-                    <div class="container">
-                        <i class="fas fa-rocket coming-soon-icon"></i>
-                        <h3>Real-World Scenarios Coming Soon!</h3>
-                        <p>Watch this space for simulated real-world scenarios to compare your benefits and costs for each option.</p>
-                    </div>
-                </section>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <i class="fas fa-map-marked-alt footer-icon"></i>
-                <h3 class="footer-title">Your Medicare Journey Starts Here</h3>
-                <p class="footer-text">
-                    At Medicare Tales, we believe that understanding your healthcare options shouldn't be overwhelming. 
-                    With the right information and guidance, you can make confident decisions about your Medicare coverage.
-                </p>
-<hr>
-<br>
-<p> Medicare has neither reviewed nor endorsed this information. This website is not connected with or endorsed by the United States government or the federal Medicare program. Please contact Medicare.gov, 1-800-MEDICARE, or your local State Health Insurance Program for help with plan choices.</p>
-            </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <div class="hero-badge-dot" aria-hidden="true"></div>
+          <span class="accent-text">Your Medicare Guide</span>
         </div>
-    </footer>
+        <h1 id="hero-heading">
+          Understanding<br>
+          <span class="highlight">Medicare</span><br>
+          Made Simple
+        </h1>
+        <p class="hero-subtitle">
+          Navigating Medicare's coverage gaps, costs, and options doesn't have to be overwhelming.
+          We break it all down so you can make the right choice for your health and your budget.
+          Keep scrolling to learn more...
+        </p>
+<!--hide this section for now
+        <div class="hero-actions">
+          <a href="#facts" class="btn-primary">
+            <span>&#10024;</span> Learn the Basics
+          </a>
+          <a href="#options" class="btn-secondary">
+            <span>&#8594;</span> Explore My Options
+          </a>
+        </div>
+-->
+      </div>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card-stack">
+          <div class="floating-card card-bg-2"></div>
+          <div class="floating-card card-bg-1"></div>
+          <div class="floating-card card-main">
+            <div class="card-icon-3d">&#127973;</div>
+            <h3>Your Coverage Snapshot</h3>
+            <p>Original Medicare is a starting point - not the full picture. Know your gaps.</p>
+            <div class="card-stat-row">
+              <div class="card-stat">
+                <span class="card-stat-num">3</span>
+                <span class="card-stat-label accent-text">Key Facts</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-num">3</span>
+                <span class="card-stat-label accent-text">Plan Types</span>
+              </div>
+              <div class="card-stat">
+                <span class="card-stat-num">1</span>
+                <span class="card-stat-label accent-text">Right Choice</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-badge-float badge-float-1" aria-hidden="true">
+            &#128204; Coverage Gaps Explained
+          </div>
+          <div class="hero-badge-float badge-float-2" aria-hidden="true">
+            &#9989; Real Scenarios Coming Soon
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POEM SECTION -->
+  <section class="poem-section" aria-labelledby="poem-heading">
+    <div class="poem-inner">
+      <div class="poem-icon" aria-hidden="true">&#128221;</div>
+      <h2 id="poem-heading" class="section-title" style="color: var(--cream); margin-bottom: 36px; text-align: center;">
+        A Little <span style="color: var(--amber);">Poem</span> to Start
+      </h2>
+      <div class="poem-text" role="region" aria-label="Introductory poem">
+        <p>In the land of healthcare, where troubles arise,</p>
+        <p>Original Medicare was birthed, a plan aged and wise.</p>
+        <p>But tests, procedures, prescriptions, you thought would be free,</p>
+        <p>Now cost a pretty penny, oh say can't you see?</p>
+        <br>
+        <p>Hearing aids, routine dental and vision to read at night</p>
+        <p>All out of reach and out of sight</p>
+        <p>You're stuck in the middle, feeling perplexed,</p>
+        <p>Medicare's coverage gap, what a cruel hex!</p>
+        <br>
+        <p>But fear not, dear friends, we'll find a way,</p>
+        <p>To close the gaps, laughing all the way!</p>
+        <p>For though coverage gaps may give us a fright,</p>
+        <p>Armed with information, we'll be alright!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE INALIENABLE FACTS SECTION -->
+  <section class="facts-section" id="facts" aria-labelledby="facts-heading">
+    <div class="section-container">
+      <div class="reveal">
+        <div class="section-label accent-text">The Foundation</div>
+        <h2 class="section-title" id="facts-heading">3 Inalienable Facts About Medicare</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-subtitle">
+          Medicare is a great federal health coverage program - but it comes with truths every enrollee must understand.
+        </p>
+      </div>
+
+      <div class="facts-grid" role="list">
+
+        <div class="fact-card reveal" role="listitem" style="transition-delay: 0.1s;">
+          <div class="fact-icon-3d fact-icon-green" aria-hidden="true">&#128683;</div>
+          <span class="fact-number" aria-label="Fact 1">1</span>
+          <h3>Mind the Coverage Gaps</h3>
+          <p>
+            Original Medicare does not cover everything. Routine dental, vision, hearing aids, and
+            many other services are not included in your standard benefits.
+          </p>
+        </div>
+
+        <div class="fact-card reveal" role="listitem" style="transition-delay: 0.2s;">
+          <div class="fact-icon-3d fact-icon-amber" aria-hidden="true">&#128176;</div>
+          <span class="fact-number" aria-label="Fact 2">2</span>
+          <h3>Mind the Cost Gaps</h3>
+          <p>
+            Original Medicare is not free, and does not pay for everything it covers.
+            You will still be responsible for deductibles, coinsurance, and copays.
+          </p>
+        </div>
+
+        <div class="fact-card reveal" role="listitem" style="transition-delay: 0.3s;">
+          <div class="fact-icon-3d fact-icon-terra" aria-hidden="true">&#128273;</div>
+          <span class="fact-number" aria-label="Fact 3">3</span>
+          <h3>Close the Gaps</h3>
+          <p>
+            The right plan for you depends on your health needs, finances, and
+            how you want to access care. There is no one-size-fits-all answer.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTIONS SECTION -->
+  <section class="options-section" id="options" aria-labelledby="options-heading">
+    <div class="section-container">
+      <div class="options-intro reveal">
+        <div>
+          <div class="section-label accent-text">Your Path Forward</div>
+          <h2 class="section-title" id="options-heading">Which Option Is Right For You?</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p class="section-subtitle">
+            Ask yourself the following three key questions. Your answers will guide you toward the Medicare coverage
+            combination that fits your life. These are real choices with real trade-offs - take your time.
+          </p>
+          <p style="margin-top: 20px; font-family: 'Source Sans Pro', sans-serif; font-size: 16px; color: var(--warm-gray); line-height: 1.7;">
+            Hover over the underlined highlighted terms below to see their definitions.
+          </p>
+        </div>
+        <div style="position: relative;">
+          <!-- Decorative element -->
+          <div style="background: linear-gradient(145deg, var(--cream-dark) 0%, white 100%); border-radius: 24px; padding: 32px; box-shadow: 0 8px 30px rgba(45,80,22,0.08); border: 1px solid rgba(156,175,136,0.2);">
+            <div style="font-size: 32px; margin-bottom: 16px;">&#9888;&#65039;</div>
+            <h3 style="font-size: 20px; color: var(--forest); margin-bottom: 12px;">Important Reminder</h3>
+            <p style="font-family: 'Source Sans Pro', sans-serif; font-size: 16px; color: var(--warm-gray); line-height: 1.7;">
+              You <strong style="color: var(--forest);">cannot combine</strong> Medicare Advantage and Medicare Supplement plans.
+              You may not be able to easily switch later, so choosing wisely from the start matters greatly.
+            </p>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(156,175,136,0.2);">
+              <p style="font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: var(--warm-gray);">
+                Choosing the wrong option may result in you paying more than you need, less coverage than you need,
+                or worse - paying and still not getting the care you need.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-cards">
+
+        <!-- Option 1: Medicaid/Dual -->
+        <div class="option-card option-card-medicaid reveal">
+          <div class="option-header">
+            <div class="option-icon-3d icon-medicaid" aria-hidden="true">&#127967;</div>
+            <div class="option-title-group">
+              <h3>Medicaid or Extra Help</h3>
+              <span class="option-tag tag-green accent-text">D-SNP Available</span>
+            </div>
+          </div>
+          <div class="option-question" aria-label="Qualifying question"><B>Question:</B>
+            Do you qualify for
+            <span class="popup-term" tabindex="0" role="button" aria-describedby="medicaid-tip">
+              Medicaid
+              <span class="popup-tooltip" id="medicaid-tip" role="tooltip">
+                <span class="tooltip-title">Medicaid</span>
+                A joint federal and state program that helps cover medical costs for people with limited income and resources. Eligibility rules vary by state.
+              </span>
+            </span>
+            or other extra help?
+          </div>
+          <p class="option-body">
+            If yes, enroll in both Medicaid and Medicare to maximize your benefits and reduce your costs.
+            Additionally, if you are willing to accept an insurance company's network and pre-authorization
+            for some services, you may also consider an MA D-SNP plan that comes with extra benefits.
+          </p>
+          <ul class="option-features" aria-label="Key benefits">
+            <li>
+              <span class="feature-check check-green" aria-hidden="true">&#10003;</span>
+              Extra benefits: dental, vision, hearing, and over-the-counter (OTC) cards
+            </li>
+            <li>
+              <span class="feature-check check-green" aria-hidden="true">&#10003;</span>
+              Standard Medicaid may not cover some of these extras - the D-SNP plan fills that gap
+            </li>
+            <li>
+              <span class="feature-check check-green" aria-hidden="true">&#10003;</span>
+              Potential to greatly reduce or eliminate your monthly premium costs
+            </li>
+          </ul>
+        </div>
+
+        <!-- Option 2: Medicare Advantage -->
+        <div class="option-card option-card-advantage reveal" style="transition-delay: 0.1s;">
+          <div class="option-header">
+            <div class="option-icon-3d icon-advantage" aria-hidden="true">&#128200;</div>
+            <div class="option-title-group">
+              <h3>Medicare Advantage Plan</h3>
+              <span class="option-tag tag-amber accent-text">Replaces Original Medicare</span>
+            </div>
+          </div>
+          <div class="option-question" aria-label="Qualifying question"><B>Question:</B>
+            Are you willing to accept an insurance company's pre-authorization and network restrictions
+            in order to reduce or eliminate your fixed monthly costs?
+          </div>
+          <p class="option-body">
+            Replace original Medicare with a Medicare Advantage plan that provides additional benefits
+            not available with original Medicare - including drug coverage, routine dental, vision,
+            hearing aids, wellness perks, and more.
+          </p>
+          <ul class="option-features" aria-label="Key considerations">
+            <li>
+              <span class="feature-check check-amber" aria-hidden="true">&#10003;</span>
+              Comes with a
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="moop-tip">
+                maximum out of pocket
+                <span class="popup-tooltip" id="moop-tip" role="tooltip">
+                  <span class="tooltip-title">Maximum Out of Pocket (MOOP)</span>
+                  The most you will pay for covered services in a plan year. After reaching this amount, the plan pays 100% of covered costs for the remainder of the year.
+                </span>
+              </span>
+              ceiling to limit your annual exposure
+            </li>
+            <li>
+              <span class="feature-check check-amber" aria-hidden="true">&#10003;</span>
+              You are still responsible for
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="ded-tip">
+                deductibles,
+                <span class="popup-tooltip" id="ded-tip" role="tooltip">
+                  <span class="tooltip-title">Deductible</span>
+                  The amount you pay out of pocket for covered health care services before your insurance plan begins to pay.
+                </span>
+              </span>
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="coins-tip">
+                coinsurance,
+                <span class="popup-tooltip" id="coins-tip" role="tooltip">
+                  <span class="tooltip-title">Coinsurance</span>
+                  Your share of the cost for a covered health care service, calculated as a percentage. For example, if your coinsurance is 20%, you pay 20% and the plan pays 80%.
+                </span>
+              </span>
+              and
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="copay-tip">
+                copays
+                <span class="popup-tooltip" id="copay-tip" role="tooltip">
+                  <span class="tooltip-title">Copay (Copayment)</span>
+                  A fixed amount you pay for a covered health care service after you've paid your deductible. For example, a $20 copay for a doctor's visit.
+                </span>
+              </span>
+            </li>
+            <li>
+              <span class="feature-check check-amber" aria-hidden="true">&#10003;</span>
+              Care restricted to insurer's network; some services may require pre-authorization
+            </li>
+          </ul>
+        </div>
+
+        <!-- Option 3: Medigap -->
+        <div class="option-card option-card-supplement reveal" style="transition-delay: 0.2s;">
+          <div class="option-header">
+            <div class="option-icon-3d icon-supplement" aria-hidden="true">&#128396;</div>
+            <div class="option-title-group">
+              <h3>Medicare Supplement (Medigap)</h3>
+              <span class="option-tag tag-terra accent-text">Supplements Original Medicare</span>
+            </div>
+          </div>
+          <div class="option-question" aria-label="Qualifying question"><B>Question:</B>
+            Are you willing and able to pay a monthly fixed cost for maximum freedom in how you access
+            care, without input from an insurance company?
+          </div>
+          <p class="option-body">
+            Supplement original Medicare with a Medigap plan to address cost gaps not covered by
+            original Medicare. This option gives you maximum flexibility in choosing your providers
+            and receiving care.
+          </p>
+          <ul class="option-features" aria-label="Key considerations">
+            <li>
+              <span class="feature-check check-terra" aria-hidden="true">&#10003;</span>
+              Helps cover your
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="ded-tip2">
+                deductibles,
+                <span class="popup-tooltip" id="ded-tip2" role="tooltip">
+                  <span class="tooltip-title">Deductible</span>
+                  The amount you pay out of pocket for covered health care services before your insurance plan begins to pay.
+                </span>
+              </span>
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="coins-tip2">
+                coinsurance,
+                <span class="popup-tooltip" id="coins-tip2" role="tooltip">
+                  <span class="tooltip-title">Coinsurance</span>
+                  Your share of the cost for a covered health care service, calculated as a percentage.
+                </span>
+              </span>
+              and
+              <span class="popup-term" tabindex="0" role="button" aria-describedby="copay-tip2">
+                copays
+                <span class="popup-tooltip" id="copay-tip2" role="tooltip">
+                  <span class="tooltip-title">Copay (Copayment)</span>
+                  A fixed amount you pay for a covered health care service after you've paid your deductible.
+                </span>
+              </span>
+            </li>
+            <li>
+              <span class="feature-check check-terra" aria-hidden="true">&#10003;</span>
+              Access any Medicare provider nationwide - no network restrictions
+            </li>
+            <li>
+              <span class="feature-check check-terra" aria-hidden="true">&#10003;</span>
+              No insurer authorization required for Medicare-approved services
+            </li>
+            <li>
+              <span class="feature-check check-terra" aria-hidden="true">&#10003;</span>
+              Does NOT include additional benefits - you must purchase drug, dental, vision, and
+              hearing coverage separately
+            </li>
+          </ul>
+        </div>
+
+      </div><!-- end .option-cards -->
+
+      <!-- Warning Box -->
+      <div class="warning-box reveal" role="alert">
+        <div class="warning-icon" aria-hidden="true">&#9888;&#65039;</div>
+        <div class="warning-text">
+          <h4>Fun Fact - Important Warning</h4>
+          <p>
+            You cannot combine Medicare Advantage and Medicare Supplement plans. You may not be able
+            to easily switch or change your choice later. Choosing the wrong option may result in you
+            paying more than you need, paying for less coverage than you need, or worse - paying for
+            coverage and still not being able to get the care you need when you need it.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMING SOON SECTION -->
+  <section class="coming-soon-section" id="scenarios" aria-labelledby="scenarios-heading">
+    <div class="coming-soon-inner">
+      <div class="coming-soon-badge reveal" aria-label="Coming soon">
+        &#8987; Coming Soon
+      </div>
+      <h2 id="scenarios-heading" class="reveal" style="transition-delay: 0.1s;">
+        Real-World <span>Scenarios</span><br>Are On The Way
+      </h2>
+      <p class="reveal" style="transition-delay: 0.2s;">
+        We're building simulated real-world comparisons that show your actual benefits and costs
+        across each Medicare option - so you can see exactly what works best for your situation. Watch this space!
+      </p>
+<!--hide this section
+      <div class="scenario-preview reveal" aria-label="Upcoming scenario examples" style="transition-delay: 0.3s;">
+        <div class="scenario-card">
+          <div class="scenario-avatar av-1" aria-hidden="true">&#128106;</div>
+          <h4>Margaret, 67</h4>
+          <p>Retired teacher, limited income, managing diabetes and high blood pressure.</p>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-avatar av-2" aria-hidden="true">&#128104;</div>
+          <h4>Robert, 72</h4>
+          <p>Former business owner, active lifestyle, values choice of any specialist nationwide.</p>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-avatar av-3" aria-hidden="true">&#128105;</div>
+          <h4>Dorothy, 70</h4>
+          <p>Recently retired, healthy, wants to minimize monthly premiums while staying covered.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay: 0.4s;">
+        <p style="font-family: 'Source Sans Pro', sans-serif; font-size: 16px; margin-bottom: 20px; color: rgba(247,243,233,0.65);">
+          Get notified when scenarios launch:
+        </p>
+        <div class="notify-form" id="notify-form" role="form" aria-label="Email notification signup">
+          <input
+            type="email"
+            class="notify-input"
+            id="notify-email"
+            placeholder="Your email address"
+            aria-label="Enter your email address"
+          />
+          <button class="notify-btn" onclick="handleNotify(event)" type="button" aria-label="Notify me when scenarios launch">
+            Notify Me
+          </button>
+        </div>
+        <div class="notify-success" id="notify-success" role="status" aria-live="polite">
+          &#10003; Thank you! We'll let you know when scenarios are ready.
+        </div>
+      </div>
+-->
+    </div>
+  </section>
+
+  <!-- DISCLAIMER + RESOURCES -->
+  <section class="disclaimer-section" id="resources" aria-labelledby="disclaimer-heading">
+    <div class="disclaimer-box">
+      <div class="disclaimer-icon" aria-hidden="true">&#128712;</div>
+      <h3 id="disclaimer-heading">Official Disclaimer</h3>
+      <p>
+        Medicare has neither reviewed nor endorsed this information.
+        This website is not connected with or endorsed by the United States government or the
+        federal Medicare program. The information provided here is for educational purposes only and
+        is not a substitute for personalized advice from a licensed professional.
+        Please contact the official resources below for help with plan choices.
+      </p>
+      <div class="disclaimer-links" role="list">
+        <a href="https://www.medicare.gov" target="_blank" rel="noopener noreferrer" class="disclaimer-link" role="listitem" aria-label="Visit Medicare.gov (opens in new tab)">
+          &#127760; Medicare.gov
+        </a>
+        <span class="disclaimer-link" role="listitem" aria-label="Call 1-800-MEDICARE">
+          &#128222; 1-800-MEDICARE
+        </span>
+        <a href="https://www.shiphelp.org" target="_blank" rel="noopener noreferrer" class="disclaimer-link" role="listitem" aria-label="Find your State Health Insurance Program (opens in new tab)">
+          &#127968; State Health Insurance Program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-logo" aria-label="Medicare Tales">
+      <div class="footer-logo-icon" aria-hidden="true">&#9749;</div>
+      <span class="footer-name">Medicare<span>Tales</span></span>
+    </div>
+    <p>Empowering seniors with clear, honest, accessible Medicare education.</p>
+    <p style="margin-top: 12px;">
+      &copy; 2025 MedicareTales. For educational purposes only.
+      Not affiliated with or endorsed by the U.S. government or the federal Medicare program.
+    </p>
+  </footer>
+
+  <script>
+    // ===== INTERSECTION OBSERVER FOR SCROLL REVEALS =====
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
         });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-        // Advanced scroll animations
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        };
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+    // ===== NOTIFY FORM =====
+    function handleNotify(e) {
+      e.preventDefault();
+      var input = document.getElementById('notify-email');
+      var form = document.getElementById('notify-form');
+      var success = document.getElementById('notify-success');
+      var email = input.value.trim();
 
-        // Apply scroll animations
-        document.querySelectorAll('.fade-in-up').forEach(element => {
-            observer.observe(element);
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.style.borderColor = 'rgba(193,123,90,0.7)';
+        input.focus();
+        input.setAttribute('aria-invalid', 'true');
+        return;
+      }
+
+      input.style.borderColor = '';
+      input.removeAttribute('aria-invalid');
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+
+    // ===== MOBILE NAV =====
+    function toggleNav(btn) {
+      var links = document.querySelector('.nav-links');
+      var isOpen = links.style.display === 'flex';
+      links.style.display = isOpen ? '' : 'flex';
+      if (!isOpen) {
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '72px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'rgba(30,53,16,0.98)';
+        links.style.padding = '20px 40px';
+        links.style.gap = '20px';
+        links.style.backdropFilter = 'blur(12px)';
+      }
+      btn.setAttribute('aria-expanded', !isOpen);
+    }
+
+    // ===== KEYBOARD ACCESSIBILITY FOR POPUPS =====
+    (function() {
+      var terms = document.querySelectorAll('.popup-term');
+      terms.forEach(function(term) {
+        term.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            var tooltip = term.querySelector('.popup-tooltip');
+            if (tooltip) {
+              var isShowing = tooltip.style.display === 'block';
+              // Hide all tooltips first
+              document.querySelectorAll('.popup-tooltip').forEach(function(t) {
+                t.style.display = '';
+              });
+              tooltip.style.display = isShowing ? '' : 'block';
+            }
+          }
+          if (e.key === 'Escape') {
+            var tooltip = term.querySelector('.popup-tooltip');
+            if (tooltip) tooltip.style.display = '';
+          }
         });
+      });
 
-        // Dynamic particle effect for hero background
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: absolute;
-                width: 4px;
-                height: 4px;
-                background: linear-gradient(45deg, rgba(255,255,255,0.6), rgba(212,165,116,0.4));
-                border-radius: 50%;
-                pointer-events: none;
-                animation: particleFloat 6s linear infinite;
-            `;
-            
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = '100%';
-            
-            document.querySelector('.hero').appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 6000);
+      // Close tooltips on outside click
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.popup-term')) {
+          document.querySelectorAll('.popup-tooltip').forEach(function(t) {
+            t.style.display = '';
+          });
         }
+      });
+    })();
 
-        // Add particle animation styles
-        const particleStyles = document.createElement('style');
-        particleStyles.textContent = `
-            @keyframes particleFloat {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 1;
-                }
-                90% {
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(particleStyles);
+    // ===== SMOOTH SCROLL NAV =====
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          var offset = 80;
+          var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
 
-        // Create particles periodically
-        setInterval(createParticle, 800);
-
-        // Enhanced hover effects for cards
-        document.querySelectorAll('.fact-card, .option-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = this.classList.contains('fact-card') ? 
-                    'translateY(-12px) rotateX(5deg) scale(1.02)' : 
-                    'translateY(-15px) rotateY(5deg) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotate(0deg) scale(1)';
-            });
-        });
-
-        // Add dynamic gradient background movement
-        let gradientPosition = 0;
-        setInterval(() => {
-            gradientPosition += 1;
-            document.body.style.backgroundPosition = `${gradientPosition}px ${gradientPosition}px`;
-        }, 50);
-
-        // Parallax scrolling effect (reduced intensity to prevent overlap)
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.2}px)`;
-            }
-        });
-
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.8s ease-in-out';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-    </script>
 </body>
 </html>
