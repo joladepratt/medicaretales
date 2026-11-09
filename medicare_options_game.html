@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medicare Options Compared</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F3E9;--forest:#2D5016;--terra:#C17B5A;--gray:#8B7D6B;--amber:#D4A574;--sage:#9CAF88;
+--o:#2D5016;--m:#C17B5A;--g:#9CAF88;--n:#D4A574;--w:#8B7D6B;
+--hf:"Playfair Display",Georgia,"Times New Roman",serif;--bf:Georgia,"Times New Roman",serif;--sf:"Source Sans Pro","Segoe UI",Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{font-size:20px;height:100%}
+*{box-sizing:inherit}
+body{margin:0;min-height:100%;background:linear-gradient(160deg,#FBF9F2 0%,var(--cream) 45%,rgba(156,175,136,.38) 100%) fixed;color:var(--forest);font-family:var(--bf);line-height:1.55;letter-spacing:.02em}
+main{max-width:900px;margin:0 auto;padding:16px}
+h1,h2{font-family:var(--hf);color:var(--forest);line-height:1.25;letter-spacing:.02em}
+h1{font-size:1.6rem;margin:.2em 0}
+h2{font-size:1.3rem;margin:.2em 0 .6em}
+p{margin:.4em 0}
+.mute{color:var(--gray);font-family:var(--sf);font-size:.9rem}
+.head{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:3px solid var(--sage)}
+.brand{display:flex;align-items:center;gap:12px}
+.ic{width:1.7em;height:1.7em;flex:none;vertical-align:middle;filter:drop-shadow(0 3px 2px rgba(45,80,22,.35))}
+.ic.xl{width:3rem;height:3rem}
+.ic.sm{width:1.4em;height:1.4em}
+button{font:inherit;letter-spacing:.02em;cursor:pointer;min-height:48px;border-radius:12px;border:2px solid var(--terra);background:linear-gradient(180deg,#FFFDF8,var(--cream));color:var(--forest);padding:8px 16px;box-shadow:0 2px 0 rgba(139,125,107,.35)}
+button:hover{border-color:var(--forest)}
+button:focus-visible,input:focus-visible{outline:4px solid var(--amber);outline-offset:2px}
+button.primary,.tabs button[aria-selected="true"]{background:linear-gradient(180deg,#D18F6E,var(--terra) 55%,#A9663F);color:#fff;font-weight:700;border-color:#A9663F;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+button.cta{background:linear-gradient(180deg,#EBC8A0,var(--amber) 55%,#BE8C5A);color:var(--forest);font-weight:700;border-color:#B58455}
+.tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.tabs button{flex:1 1 150px;font-family:var(--hf);display:flex;align-items:center;justify-content:center;gap:8px}
+.card{background:linear-gradient(180deg,#FFFEFA,var(--cream));border:2px solid var(--sage);border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 6px 14px rgba(45,80,22,.1)}
+.choice{display:block;width:100%;text-align:left;margin:10px 0;border-color:var(--sage)}
+.choice:hover{border-color:var(--terra)}
+.prog{height:12px;background:rgba(156,175,136,.4);border-radius:8px;overflow:hidden;margin:6px 0 14px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--terra),var(--amber))}
+.row{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:700px){.row{grid-template-columns:repeat(3,1fr)}}
+.col{border-left:8px solid var(--c);background:linear-gradient(135deg,rgba(156,175,136,.22),rgba(247,243,233,.9));padding:8px 12px;border-radius:10px}
+.col b{display:flex;align-items:center;gap:8px;font-family:var(--sf);color:var(--forest);font-size:.9rem;text-transform:uppercase;margin-bottom:4px}
+.topic{font-family:var(--hf);font-weight:700;font-size:1.1rem;margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid var(--sage)}
+.res{border-left:10px solid var(--c);padding-left:12px;margin:16px 0}
+.res>b{display:flex;align-items:center;gap:10px;font-family:var(--hf)}
+.meter{height:14px;background:rgba(156,175,136,.4);border-radius:8px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--c),var(--amber))}
+label{display:block;font-weight:700;margin:16px 0 4px}
+input[type=number]{font:inherit;letter-spacing:.02em;width:100%;min-height:48px;padding:6px 10px;border:2px solid var(--sage);border-radius:10px;background:#FFFEFA;color:var(--forest)}
+input[type=range]{width:100%;height:36px;accent-color:var(--terra)}
+.big{font-family:var(--hf);font-size:1.7rem;font-weight:700;color:var(--forest)}
+.grid3{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:700px){.grid3{grid-template-columns:repeat(2,1fr)}}
+.res-card{border-top:8px solid var(--c);margin:0}
+.res-card b{display:flex;align-items:center;gap:10px;font-family:var(--hf)}
+.chip{display:inline-block;background:linear-gradient(180deg,#EBC8A0,var(--amber));color:var(--forest);font-family:var(--sf);font-weight:700;border-radius:20px;padding:2px 12px;margin-left:6px}
+.note{background:linear-gradient(90deg,rgba(212,165,116,.38),rgba(212,165,116,.12));border-left:8px solid var(--amber);border-radius:10px;padding:10px 14px;margin:14px 0;font-size:.9rem}
+.foot{text-align:center;margin-top:22px;padding-top:12px;border-top:3px solid var(--sage)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="gF" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#6F9A4A"/><stop offset=".5" stop-color="#2D5016"/><stop offset="1" stop-color="#1B3309"/></linearGradient>
+<linearGradient id="gT" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#E7AE91"/><stop offset=".5" stop-color="#C17B5A"/><stop offset="1" stop-color="#8E5136"/></linearGradient>
+<linearGradient id="gA" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#F3D6B1"/><stop offset=".5" stop-color="#D4A574"/><stop offset="1" stop-color="#A97A48"/></linearGradient>
+<linearGradient id="gS" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#D3E0C5"/><stop offset=".5" stop-color="#9CAF88"/><stop offset="1" stop-color="#6A7F57"/></linearGradient>
+<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<symbol id="i-shield" viewBox="0 0 64 64"><path d="M32 5 L55 13 V31 C55 45 45 55 32 60 C19 55 9 45 9 31 V13 Z" fill="url(#gF)" stroke="#9CAF88" stroke-opacity=".7" stroke-width="1.5"/><path d="M32 8 L51 15 V28 C51 33 49 37 46 40 C38 33 24 31 13 33 C12 31 13 29 13 28 V15 Z" fill="url(#gl)" opacity=".6"/><path d="M22 32 L29 39 L43 24" fill="none" stroke="#F7F3E9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 64 64"><path d="M32 57 C9 41 5 24 15 14 C23 7 31 11 32 18 C33 11 41 7 49 14 C59 24 55 41 32 57Z" fill="url(#gT)" stroke="#8E5136" stroke-opacity=".6" stroke-width="1.5"/><path d="M18 17 C23 12 29 14 31 21 C26 20 20 23 15 30 C13 25 14 20 18 17Z" fill="url(#gl)" opacity=".75"/><path d="M32 26 V42 M24 34 H40" stroke="#F7F3E9" stroke-width="5" stroke-linecap="round"/></symbol>
+<symbol id="i-umb" viewBox="0 0 64 64"><path d="M32 34 V52 C32 58 24 58 24 52" fill="none" stroke="#8B7D6B" stroke-width="4" stroke-linecap="round"/><path d="M6 34 C6 17 18 7 32 7 C46 7 58 17 58 34 C54 30 50 30 46 34 C42 30 38 30 32 34 C26 30 22 30 18 34 C14 30 10 30 6 34Z" fill="url(#gA)" stroke="#A97A48" stroke-width="1.5"/><path d="M12 28 C13 18 21 11 31 11 C25 16 21 22 20 30 C17 27 14 27 12 28Z" fill="url(#gl)" opacity=".8"/><circle cx="32" cy="6" r="3" fill="#A97A48"/></symbol>
+<symbol id="i-umbn" viewBox="0 0 64 64"><path d="M32 34 V52 C32 58 24 58 24 52" fill="none" stroke="#8B7D6B" stroke-width="4" stroke-linecap="round"/><path d="M6 34 C6 17 18 7 32 7 C46 7 58 17 58 34 C54 30 50 30 46 34 C42 30 38 30 32 34 C26 30 22 30 18 34 C14 30 10 30 6 34Z" fill="url(#gS)" stroke="#6A7F57" stroke-width="1.5"/><path d="M12 28 C13 18 21 11 31 11 C25 16 21 22 20 30 C17 27 14 27 12 28Z" fill="url(#gl)" opacity=".8"/><circle cx="32" cy="6" r="3" fill="#6A7F57"/></symbol>
+<symbol id="i-coin" viewBox="0 0 64 64"><circle cx="32" cy="34" r="25" fill="#A97A48"/><circle cx="32" cy="31" r="25" fill="url(#gA)" stroke="#A97A48" stroke-width="1.5"/><circle cx="32" cy="31" r="18" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/><path d="M12 24 C15 12 27 7 38 9 C28 13 21 20 19 31 C15 31 11 29 12 24Z" fill="url(#gl)" opacity=".8"/><text x="32" y="40" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#7A5226">$</text></symbol>
+<symbol id="i-clip" viewBox="0 0 64 64"><rect x="12" y="9" width="40" height="50" rx="8" fill="url(#gS)" stroke="#6A7F57" stroke-width="1.5"/><rect x="18" y="16" width="28" height="38" rx="4" fill="#F7F3E9"/><rect x="23" y="4" width="18" height="11" rx="4" fill="url(#gF)"/><path d="M22 27 L25 30 L30 24 M22 40 L25 43 L30 37" fill="none" stroke="#C17B5A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 27 H42 M34 40 H42" stroke="#8B7D6B" stroke-width="3" stroke-linecap="round"/><path d="M14 14 C14 11 17 10 20 10 H32 C24 14 20 24 20 38 C16 36 14 32 14 28Z" fill="url(#gl)" opacity=".6"/></symbol>
+<symbol id="i-cols" viewBox="0 0 64 64"><rect x="8" y="30" width="14" height="28" rx="4" fill="url(#gT)"/><rect x="25" y="12" width="14" height="46" rx="4" fill="url(#gF)"/><rect x="42" y="22" width="14" height="36" rx="4" fill="url(#gA)"/><rect x="10" y="32" width="4" height="22" rx="2" fill="url(#gl)" opacity=".8"/><rect x="27" y="14" width="4" height="40" rx="2" fill="url(#gl)" opacity=".7"/><rect x="44" y="24" width="4" height="32" rx="2" fill="url(#gl)" opacity=".8"/></symbol>
+</defs></svg>
+<main>
+<div class="head">
+  <div class="brand"><svg class="ic xl" aria-hidden="true"><use href="#i-shield"/></svg><h1>Medicare Options Compared</h1></div>
+  <div role="group" aria-label="Text size">
+    <button id="smaller" aria-label="Make text smaller">A-</button>
+    <button id="bigger" aria-label="Make text larger">A+</button>
+  </div>
+</div>
+<p class="mute">A plain-English guide to Original Medicare, Medicare Advantage, and Medigap. It is for learning only, not advice.</p>
+
+<div class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="quiz"><svg class="ic sm" aria-hidden="true"><use href="#i-clip"/></svg>1. Find my fit</button>
+  <button role="tab" aria-selected="false" data-tab="compare"><svg class="ic sm" aria-hidden="true"><use href="#i-cols"/></svg>2. Compare</button>
+  <button role="tab" aria-selected="false" data-tab="cost"><svg class="ic sm" aria-hidden="true"><use href="#i-coin"/></svg>3. Estimate costs</button>
+</div>
+
+<section id="quiz" class="card"></section>
+
+<section id="compare" hidden>
+  <div class="note"><b>Key rule:</b> You pick <b>one path</b>: (A) Original Medicare, with or without a Medigap policy, or (B) Medicare Advantage. You cannot use Medigap with Medicare Advantage.</div>
+  <div id="cmp"></div>
+</section>
+
+<section id="cost" class="card" hidden>
+  <h2>Estimate your yearly costs</h2>
+  <p class="mute">Move the sliders to match a typical year for you. Edit the premiums with the numbers from plans you are looking at.</p>
+  <label for="visits">Doctor and specialist visits per year: <span id="visitsV">10</span></label>
+  <input type="range" id="visits" min="0" max="40" value="10">
+  <label for="stays">Hospital stays per year: <span id="staysV">0</span></label>
+  <input type="range" id="stays" min="0" max="3" value="0">
+  <label for="rx">Your drugs cost about this much per month (before insurance)</label>
+  <input type="number" id="rx" value="100" min="0" inputmode="numeric">
+  <label for="gapP">Medigap Plan G monthly premium</label>
+  <input type="number" id="gapP" value="150" min="0" inputmode="numeric">
+  <label for="nP">Medigap Plan N monthly premium</label>
+  <input type="number" id="nP" value="115" min="0" inputmode="numeric">
+  <label for="partD">Stand-alone drug plan (Part D) monthly premium</label>
+  <input type="number" id="partD" value="40" min="0" inputmode="numeric">
+  <label for="maP">Medicare Advantage monthly premium (many are $0)</label>
+  <input type="number" id="maP" value="0" min="0" inputmode="numeric">
+  <h2 style="margin-top:22px">Your estimated year</h2>
+  <div class="grid3" id="out"></div>
+  <div class="note" id="worst"></div>
+  <p class="mute">Estimates use 2026 national figures: Part B premium $202.90/month, Part B deductible $283, Part A hospital deductible $1,736 per benefit period, and a Medicare Advantage in-network out-of-pocket limit of up to $9,250. Real plans differ, and 2027 amounts may change. Confirm at Medicare.gov or with your State Health Insurance Assistance Program (SHIP).</p>
+</section>
+
+<p class="mute foot">&copy;MedicareTales. For educational purposes only.<br>
+Empowering seniors with clear, honest, accessible Medicare education.<br> 
+Not affiliated with or endorsed by the U.S. government or the federal Medicare program.<br>
+For help, call 1-800-MEDICARE (1-800-633-4227) or visit <a href="https://www.medicare.gov" target="_blank">medicare.gov</a> and <a href="https://www.shiphelp.org" target="_blank">shiphelp.org</a>.</p>
+</main>
+
+<script>
+(function(){
+var NAMES={o:"Original Medicare only",m:"Medicare Advantage",g:"Original Medicare + Medigap"};
+var ICON={o:"i-shield",m:"i-heart",g:"i-umb",n:"i-umbn"};
+function ic(id,cls){return '<svg class="ic '+(cls||"")+'" aria-hidden="true"><use href="#'+id+'"/></svg>'}
+
+/* Text size */
+var size=20;
+function setSize(n){size=Math.max(18,Math.min(28,n));document.documentElement.style.fontSize=size+"px";}
+document.getElementById("bigger").onclick=function(){setSize(size+2)};
+document.getElementById("smaller").onclick=function(){setSize(size-2)};
+
+/* Tabs */
+var tabs=document.querySelectorAll("[data-tab]");
+function show(id){
+  ["quiz","compare","cost"].forEach(function(s){document.getElementById(s).hidden=(s!==id)});
+  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.tab===id?"true":"false")});
+  window.scrollTo(0,0);
+}
+tabs.forEach(function(b){b.onclick=function(){show(b.dataset.tab)}});
+
+/* Quiz */
+var Q=[
+ {q:"How do you feel about choosing your doctors?",a:[
+  ["I want to see any doctor or hospital that takes Medicare",{o:2,g:3,m:0}],
+  ["I am fine using a plan's network of doctors",{o:0,g:0,m:3}],
+  ["I'm not sure yet",{o:1,g:1,m:1}]]},
+ {q:"What matters more to you?",a:[
+  ["The lowest monthly premium",{o:2,g:0,m:3}],
+  ["Predictable costs with few surprise bills",{o:0,g:3,m:1}],
+  ["A balance of both",{o:1,g:1,m:1}]]},
+ {q:"Do you travel or live in more than one state?",a:[
+  ["Yes, often",{o:2,g:3,m:0}],
+  ["Rarely or never",{o:0,g:0,m:2}]]},
+ {q:"Do you want dental, vision, and hearing coverage in the same plan?",a:[
+  ["Yes, that would be a big help",{o:0,g:0,m:3}],
+  ["Not needed, or I will buy it separately",{o:1,g:1,m:0}]]},
+ {q:"How much health care do you expect to use?",a:[
+  ["Very little. I'm healthy",{o:3,g:0,m:2}],
+  ["Some regular visits and prescriptions",{o:0,g:1,m:2}],
+  ["A lot, or I may have a serious illness",{o:0,g:3,m:1}]]}
+];
+var step=0,score={o:0,m:0,g:0},hist=[];
+var qs=document.getElementById("quiz");
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function renderQ(){
+  if(step>=Q.length){return renderResult()}
+  var cur=Q[step];
+  var h='<div class="mute">Question '+(step+1)+' of '+Q.length+'</div><div class="prog"><i style="width:'+(step/Q.length*100)+'%"></i></div><h2>'+esc(cur.q)+'</h2>';
+  cur.a.forEach(function(x,i){h+='<button class="choice" data-i="'+i+'">'+esc(x[0])+'</button>'});
+  if(step>0)h+='<button id="back">&lt; Back</button>';
+  qs.innerHTML=h;
+  qs.querySelectorAll(".choice").forEach(function(b){b.onclick=function(){
+    var pts=cur.a[+b.dataset.i][1];hist.push(pts);
+    for(var k in pts)score[k]+=pts[k];
+    step++;renderQ();window.scrollTo(0,0);
+  }});
+  var bk=document.getElementById("back");
+  if(bk)bk.onclick=function(){var p=hist.pop();for(var k in p)score[k]-=p[k];step--;renderQ()};
+}
+var WHY={
+ o:"Fits people who are healthy, want any-doctor freedom, and accept some cost-sharing risk. You will usually add a separate drug plan (Part D).",
+ m:"Fits people who want low premiums, extras like dental and vision, and are comfortable with a network and plan rules. Drug coverage is usually built in.",
+ g:"Fits people who want any-doctor freedom and the most predictable costs. Premiums are higher, but a Medigap plan pays most of what Original Medicare leaves behind. Plan G has the fewest bills; Plan N has a lower premium but small copays."
+};
+function renderResult(){
+  var keys=["o","m","g"].sort(function(a,b){return score[b]-score[a]});
+  var max=Math.max(1,score[keys[0]]);
+  var h='<h2>Your best matches</h2><p class="mute">Based on your answers. Most people should still compare real plans in their area.</p>';
+  keys.forEach(function(k,i){
+    h+='<div class="res" style="--c:var(--'+k+')"><b>'+ic(ICON[k])+'<span>'+(i===0?"Best fit: ":(i+1)+". ")+NAMES[k]+'</span></b>'+
+    '<div class="meter"><i style="width:'+Math.round(score[k]/max*100)+'%"></i></div><p>'+WHY[k]+'</p></div>';
+  });
+  h+='<div class="note">Timing matters for Medigap: your best window is the 6 months after you are 65 and enrolled in Part B. Later, insurers in most states can ask health questions or deny you.</div>'+
+  '<button class="cta" id="gc">See the side-by-side comparison</button> <button id="again">Start over</button>';
+  qs.innerHTML=h;
+  document.getElementById("gc").onclick=function(){show("compare")};
+  document.getElementById("again").onclick=function(){step=0;score={o:0,m:0,g:0};hist=[];renderQ()};
+}
+renderQ();
+
+/* Comparison */
+var R=[
+ ["What it is","Government coverage: Part A (hospital) and Part B (doctor and outpatient).","A private-company plan that replaces Original Medicare (Part C). It must cover everything Original does.","Private insurance that works with Original Medicare to pay costs it leaves, like the 20% coinsurance."],
+ ["Monthly cost","Part B premium ($202.90 in 2026), plus Part A if you lack work credits.","Part B premium plus the plan's premium, which is often $0.","Part B premium plus a Medigap premium, which varies by age, plan, and state."],
+ ["Your choice of doctors","Any doctor or hospital in the U.S. that accepts Medicare.","Usually a network (HMO or PPO). Going outside it may cost more or not be covered.","Any doctor or hospital in the U.S. that accepts Medicare."],
+ ["Yearly out-of-pocket limit","None. 20% of Part B costs has no cap.","Yes. There is a yearly cap, up to $9,250 in-network in 2026.","Plan G leaves only the Part B deductible ($283 in 2026). Plan N adds that deductible plus small copays (see below)."],
+ ["Prescription drugs","Not included. Add a Part D plan.","Usually included (MAPD).","Not included. Add a Part D plan."],
+ ["Dental, vision, hearing","Mostly not covered.","Often included to some degree.","Not covered."],
+ ["Approvals and rules","Few. You can go directly to specialists.","Some services need prior approval or referrals.","Few. Medicare rules apply."],
+ ["Traveling","Covered across the U.S.","Often limited to emergencies outside your area.","Covered across the U.S."],
+ ["Switching later","Can add Medigap, but may face health questions.","Can switch each fall or during Jan to Mar. Going back to Medigap may need health approval.","Hard to change if you have health problems and apply late."]
+];
+var cm=document.getElementById("cmp"),h="";
+R.forEach(function(r){
+  h+='<div class="card"><p class="topic">'+r[0]+'</p><div class="row">'+
+  '<div class="col" style="--c:var(--o)"><b>'+ic("i-shield","sm")+'Original only</b>'+r[1]+'</div>'+
+  '<div class="col" style="--c:var(--m)"><b>'+ic("i-heart","sm")+'Medicare Advantage</b>'+r[2]+'</div>'+
+  '<div class="col" style="--c:var(--g)"><b>'+ic("i-umb","sm")+'Original + Medigap</b>'+r[3]+'</div></div></div>';
+});
+h+='<div class="card"><p class="topic">Medigap Plan G vs. Plan N</p><div class="row">'+
+'<div class="col" style="--c:var(--g)"><b>'+ic("i-umb","sm")+'Plan G</b>Higher premium. Pays nearly everything Original Medicare leaves, except the yearly Part B deductible ($283 in 2026). No copays.</div>'+
+'<div class="col" style="--c:var(--n)"><b>'+ic("i-umbn","sm")+'Plan N</b>Lower premium. Pays most of the same costs, but you pay the Part B deductible, up to $20 per office visit, up to $50 per ER visit if not admitted, and any Part B "excess charges."</div>'+
+'<div class="col" style="--c:var(--w)"><b>'+ic("i-cols","sm")+'Which fits?</b>Plan N tends to suit people who visit doctors less often and want to save on premium. Plan G suits those who want the fewest bills. Both cover hospital costs and foreign travel emergencies. Both are sold in most states.</div></div></div>';
+cm.innerHTML=h;
+
+/* Cost estimator */
+var PB=202.90*12,PBD=283,PAD=1736,MAMAX=9250;
+function $(id){return document.getElementById(id)}
+function num(id){var v=parseFloat($(id).value);return isNaN(v)||v<0?0:v}
+function fmt(n){return "$"+Math.round(n).toLocaleString("en-US")}
+function calc(){
+  var v=+$("visits").value,s=+$("stays").value;
+  $("visitsV").textContent=v;$("staysV").textContent=s;
+  var rx=num("rx")*12*0.35;  /* rough: you pay about a third of drug cost on average */
+  var pd=num("partD")*12,gp=num("gapP")*12,mp=num("maP")*12;
+  var visitCost=v*150;       /* assumed $150 Medicare-approved cost per visit */
+  var orig=PB+pd+PBD+Math.max(0,visitCost-PBD)*0.2+s*PAD+rx;
+  var gap=PB+pd+gp+PBD+rx;
+  var gapN=PB+pd+num("nP")*12+PBD+v*20+rx;  /* assumes a $20 copay on every visit (upper estimate) */
+  var ma=PB+mp+Math.min(MAMAX,v*20+s*1500+rx*0.8);
+  var vals={o:orig,m:ma,g:gap,n:gapN};
+  var best=Object.keys(vals).sort(function(a,b){return vals[a]-vals[b]})[0];
+  var h="";
+  ["o","m","g","n"].forEach(function(k){
+    var lbl=k==="g"?"Original + Medigap Plan G":k==="n"?"Original + Medigap Plan N":NAMES[k];
+    h+='<div class="card res-card" style="--c:var(--'+k+')"><b>'+ic(ICON[k])+'<span>'+lbl+'</span></b><div class="big">'+fmt(vals[k])+'</div><div class="mute">per year'+(k===best?'<span class="chip">lowest in this scenario</span>':"")+'</div></div>';
+  });
+  $("out").innerHTML=h;
+  $("worst").innerHTML="<b>A very bad year (long illness):</b> Original only has no cap, so costs could reach many thousands of dollars. Medicare Advantage caps medical costs at up to "+fmt(MAMAX)+" plus premiums. Medigap Plan G caps medical costs at the "+fmt(PBD)+" Part B deductible plus premiums. Plan N adds copays of up to $20 per office visit and $50 per ER visit, so it costs more in a year with many visits.";
+}
+["visits","stays","rx","gapP","nP","partD","maP"].forEach(function(id){$(id).addEventListener("input",calc)});
+calc();
+})();
+</script>
+</body>
+</html>
